@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
-import ReactNative, { requireNativeComponent, View, UIManager, StyleSheet, Platform } from 'react-native';
-import ScrollResponder from 'react-native/Libraries/Components/ScrollResponder';
-import createReactClass from 'create-react-class';
+import React, { Component } from "react";
+import ReactNative, {
+  requireNativeComponent,
+  View,
+  UIManager,
+  StyleSheet,
+  Platform
+} from "react-native";
+import ScrollResponder from "react-native/Libraries/Components/ScrollResponder";
+import createReactClass from "create-react-class";
 
-const NativeScrollView = requireNativeComponent('DirectedScrollView');
-const NativeScrollViewChild = requireNativeComponent('DirectedScrollViewChild');
+const NativeScrollView = requireNativeComponent("DirectedScrollView");
+const NativeScrollViewChild = requireNativeComponent("DirectedScrollViewChild");
 
 const ScrollView = createReactClass({
   mixins: [ScrollResponder.Mixin],
@@ -21,17 +27,17 @@ const ScrollView = createReactClass({
     return ReactNative.findNodeHandle(this._scrollViewRef);
   },
   scrollTo: function({ x, y, animated }) {
-     UIManager.dispatchViewManagerCommand(
+    UIManager.dispatchViewManagerCommand(
       this.getScrollableNode(),
-      UIManager.DirectedScrollView.Commands.scrollTo,
-      [x || 0, y || 0, animated !== false],
+      UIManager.getViewManagerConfig("DirectedScrollView").Commands.scrollTo,
+      [x || 0, y || 0, animated !== false]
     );
   },
   zoomToStart: function({ animated }) {
-     UIManager.dispatchViewManagerCommand(
+    UIManager.dispatchViewManagerCommand(
       this.getScrollableNode(),
       UIManager.DirectedScrollView.Commands.zoomToStart,
-      [animated !== false],
+      [animated !== false]
     );
   },
   _scrollViewRef: null,
@@ -40,12 +46,12 @@ const ScrollView = createReactClass({
   },
   componentDidMount: function() {
     setTimeout(() => {
-      this.zoomToStart({animated: false});
+      this.zoomToStart({ animated: false });
     }, 0);
   },
   render: function() {
     return (
-      <NativeScrollView 
+      <NativeScrollView
         {...this.props}
         ref={this._setScrollViewRef}
         onScrollBeginDrag={this.scrollResponderHandleScrollBeginDrag}
@@ -53,15 +59,24 @@ const ScrollView = createReactClass({
         onScroll={this.scrollResponderHandleScroll}
         onMomentumScrollBegin={this.scrollResponderHandleMomentumScrollBegin}
         onMomentumScrollEnd={this.scrollResponderHandleMomentumScrollEnd}
-        onStartShouldSetResponder={this.scrollResponderHandleStartShouldSetResponderCapture}
-        onScrollShouldSetResponder={this.scrollResponderHandleScrollShouldSetResponder}
+        onStartShouldSetResponder={
+          this.scrollResponderHandleStartShouldSetResponderCapture
+        }
+        onScrollShouldSetResponder={
+          this.scrollResponderHandleScrollShouldSetResponder
+        }
         onResponderGrant={this.scrollResponderHandleResponderGrant}
-        onResponderTerminationRequest={this.scrollResponderHandleTerminationRequest}
+        onResponderTerminationRequest={
+          this.scrollResponderHandleTerminationRequest
+        }
         onResponderTerminate={this.scrollResponderHandleTerminate}
         onResponderRelease={this.scrollResponderHandleResponderRelease}
         onResponderReject={this.scrollResponderHandleResponderReject}
       >
-        <View style={this.props.contentContainerStyle} pointerEvents={'box-none'}>
+        <View
+          style={this.props.contentContainerStyle}
+          pointerEvents={"box-none"}
+        >
           {this.props.children}
         </View>
       </NativeScrollView>
@@ -81,6 +96,6 @@ export const ScrollViewChild = createReactClass({
   }
 });
 
-export const scrollViewWillBeginDragging = 'scrollViewWillBeginDragging';
+export const scrollViewWillBeginDragging = "scrollViewWillBeginDragging";
 
-export const scrollViewDidEndDragging = 'scrollViewDidEndDragging';
+export const scrollViewDidEndDragging = "scrollViewDidEndDragging";
