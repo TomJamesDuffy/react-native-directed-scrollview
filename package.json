@@ -24,14 +24,6 @@
     "react-native": ">=0.56.0"
   },
   "nativePackage": true,
-  "rnpm": {
-    "android": {
-      "packageInstance": "new DirectedScrollViewPackage()"
-    },
-    "ios": {
-      "project": "ios/RCTDirectedScrollView.xcodeproj"
-    }
-  },
   "author": "Chris Fisher",
   "license": "MIT",
   "bugs": {
