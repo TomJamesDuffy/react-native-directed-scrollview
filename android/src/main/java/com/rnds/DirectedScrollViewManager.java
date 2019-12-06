@@ -74,6 +74,11 @@ class DirectedScrollViewManager extends ViewGroupManager<DirectedScrollView> {
     view.setMinimumZoomScale(minimumZoomScale);
   }
 
+   @ReactProp(name = "zoomScale", defaultFloat = 1.0f)
+  public void setZoomScale(DirectedScrollView view, @Nullable float zoomScale) {
+    view.setZoomScale(zoomScale);
+  }
+
   @ReactProp(name = "maximumZoomScale", defaultFloat = 1.0f)
   public void setMaximumZoomScale(DirectedScrollView view, @Nullable float maximumZoomScale) {
     view.setMaximumZoomScale(maximumZoomScale);

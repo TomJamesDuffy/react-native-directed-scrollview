@@ -33,11 +33,11 @@ const ScrollView = createReactClass({
       [x || 0, y || 0, animated !== false]
     );
   },
-  zoomToStart: function({ animated }) {
+  zoomToStart: function({ animated, zoomScale }) {
     UIManager.dispatchViewManagerCommand(
       this.getScrollableNode(),
       UIManager.getViewManagerConfig("DirectedScrollView").Commands.zoomToStart,
-      [animated !== false]
+      [animated !== false, zoomScale]
     );
   },
   _scrollViewRef: null,
@@ -46,7 +46,10 @@ const ScrollView = createReactClass({
   },
   componentDidMount: function() {
     setTimeout(() => {
-      this.zoomToStart({ animated: false });
+      this.zoomToStart({
+        animated: false,
+        zoomScale: this.props.zoomScale ? this.props.zoomScale : 1.0
+      });
     }, 0);
   },
   render: function() {

@@ -31,6 +31,7 @@ public class DirectedScrollView extends ReactViewGroup {
   private float minimumZoomScale = 1.0f;
   private float maximumZoomScale = 1.0f;
   private boolean bounces = true;
+  private float zoomScale = 1.0f;
   private boolean alwaysBounceVertical = false;
   private boolean alwaysBounceHorizontal = false;
   private boolean bouncesZoom = true;
@@ -336,6 +337,8 @@ public class DirectedScrollView extends ReactViewGroup {
     for (DirectedScrollViewChild scrollableChild : scrollableChildren) {
       scrollableChild.setPivotY(0);
       scrollableChild.setPivotX(0);
+      scrollableChild.setScaleX(zoomScale);
+      scrollableChild.setScaleY(zoomScale);
     }
   }
 
@@ -408,6 +411,10 @@ public class DirectedScrollView extends ReactViewGroup {
         Math.round(getContentContainerHeight()),
         getWidth(),
         getHeight()));
+  }
+
+  public void setZoomScale(final float zoomScale) {
+    this.zoomScale = zoomScale;
   }
 
   public void setMaximumZoomScale(final float maximumZoomScale) {
